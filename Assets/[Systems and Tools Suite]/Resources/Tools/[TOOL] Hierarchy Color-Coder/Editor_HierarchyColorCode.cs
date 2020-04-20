@@ -249,7 +249,7 @@ public class Editor_HierarchyColorCode : MonoBehaviour
 #if UNITY_EDITOR
     public class HierarchyEditorWindow : EditorWindow
     {
-        [MenuItem("Tile Tap/Utility/Hierarchy Color Coder")]
+        [MenuItem("UTS/Utility/Hierarchy Color Coder")]
         public static void ShowWindow()
         {
             GetWindow<HierarchyEditorWindow>("HierarchyEditor");

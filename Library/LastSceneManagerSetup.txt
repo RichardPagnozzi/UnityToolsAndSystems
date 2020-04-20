@@ -1,5 +1,6 @@
 sceneSetups:
-- path: Assets/[0] Scenes/SampleScene.unity
+- path: Assets/[Systems and Tools Suite]/Resources/Systems/[SYSTEM] Waypoint Navigator/Waypoint
+    Demo.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

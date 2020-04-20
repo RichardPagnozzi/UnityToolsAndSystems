@@ -43,11 +43,11 @@ public class saveFileReader : MonoBehaviour
     #region Global Read Methods
     #endregion 
 
-    private async void ReadSaveFileFromJSon(saveFile SaveFile)
-    {
-        string filePath = Application.persistentDataPath + "/UTS_SaveFileFolder/UTS_SaveFile.json";
+    //private async void ReadSaveFileFromJSon(saveFile SaveFile)
+    //{
+    //    string filePath = Application.persistentDataPath + "/UTS_SaveFileFolder/UTS_SaveFile.json";
 
-    }
+    //}
 }
 
 

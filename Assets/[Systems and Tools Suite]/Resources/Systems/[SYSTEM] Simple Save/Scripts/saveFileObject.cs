@@ -6,7 +6,7 @@ using UnityEngine;
 public class saveFileObject : MonoBehaviour
 {
     #region Variables
-
+    [SerializeField]
     private saveFile m_SaveFile; // saveFile template
 
     #region Save File Variables 
@@ -23,6 +23,7 @@ public class saveFileObject : MonoBehaviour
     private string SaveFolderName;
 
     #endregion
+
 
 
     #region Factory Methods

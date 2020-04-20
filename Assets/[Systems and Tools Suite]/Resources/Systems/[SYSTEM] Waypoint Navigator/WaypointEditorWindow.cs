@@ -9,7 +9,7 @@ public class WaypointEditorWindow : EditorWindow
     public enum ROUTE { RED, YELLOW, BLUE, GREEN, WHITE, TRUCK_A, TRUCK_B }
     public ROUTE VehicleRoute;
 
-    [MenuItem("RP/WayPoint Window")]
+    [MenuItem("UTS/WayPoint Window")]
     public static void OpenWindow()
     {
         GetWindow<WaypointEditorWindow>();
