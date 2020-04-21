@@ -11,43 +11,36 @@ public class saveFileReader : MonoBehaviour
     #region Variables
     [SerializeField]
     private saveFileObject m_SaveFileObject;
-    private saveFile m_SaveFile;
+    private string m_jSonString;
     #endregion
 
     #region Factory Methods
     private void Awake()
     {
-        Set_SaveFileObjectInstance();
+        m_SaveFileObject = GameObject.FindGameObjectWithTag("SaveFileObject").GetComponent<saveFileObject>();
     }
+    #endregion
 
-    private void Set_SaveFileObjectInstance()
+    #region Local Read Methods   
+    private string GetJsonStringFromFile(string path) // Read File into Json String
     {
-        if (GameObject.FindGameObjectWithTag("SaveFileObject") != null)
-        {
-            m_SaveFileObject = GameObject.FindGameObjectWithTag("SaveFileObject").GetComponent<saveFileObject>();
-        }
+            return m_jSonString = File.ReadAllText(path);
+    }
+    
+    private saveFile ConvertJsonToClass(string jSon) // Copy jSon string into a useable object
+    {
+        if (m_jSonString != null)
+            return JsonUtility.FromJson<saveFile>(jSon);
         else
-        {
-            GameObject obj = new GameObject("SaveFileObject");
-            obj.AddComponent<saveFileObject>();
-            obj.gameObject.tag = "SaveFileObject";
-            obj.gameObject.transform.SetParent(null);
-            m_SaveFileObject = obj.GetComponent<saveFileObject>();
-        }
+            return null;
+    }
+   
+    public saveFile GetSaveFileFromJson(string path) // PUBLIC METHOD to access the referenced save file from jSon
+    {
+        return ConvertJsonToClass(GetJsonStringFromFile(path));
     }
     #endregion
 
-    #region Local Read Methods
-    #endregion
-
-    #region Global Read Methods
-    #endregion 
-
-    //private async void ReadSaveFileFromJSon(saveFile SaveFile)
-    //{
-    //    string filePath = Application.persistentDataPath + "/UTS_SaveFileFolder/UTS_SaveFile.json";
-
-    //}
 }
 
 

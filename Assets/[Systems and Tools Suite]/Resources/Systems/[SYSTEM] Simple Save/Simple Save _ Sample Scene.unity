@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 331549126}
   - component: {fileID: 331549125}
   - component: {fileID: 331549124}
-  - component: {fileID: 331549123}
   m_Layer: 0
   m_Name: 'Save to jSon: Button'
   m_TagString: Untagged
@@ -160,19 +159,6 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &331549123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331549121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ca61f3423e35b47ad5956b4215a6c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SaveFileObject: {fileID: 0}
 --- !u!114 &331549124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,19 +202,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 331549123}
-        m_MethodName: SaveLocal_ToGlobal
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 331549123}
-        m_MethodName: SaveGlobal_toJSON
+      - m_Target: {fileID: 673543023}
+        m_MethodName: WriteToJSON
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -283,6 +258,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 673543022}
+  - component: {fileID: 673543024}
+  - component: {fileID: 673543023}
   - component: {fileID: 673543021}
   m_Layer: 0
   m_Name: Game
@@ -304,6 +281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SaveFileObject: {fileID: 0}
+  m_SaveFileReader: {fileID: 673543024}
+  m_SaveFileWriter: {fileID: 673543023}
 --- !u!4 &673543022
 Transform:
   m_ObjectHideFlags: 0
@@ -321,6 +300,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &673543023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673543020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ca61f3423e35b47ad5956b4215a6c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SaveFileObject: {fileID: 0}
+--- !u!114 &673543024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673543020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e602124940d70d47924d49522945f99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SaveFileObject: {fileID: 0}
 --- !u!1 &691903098
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +595,6 @@ GameObject:
   - component: {fileID: 931845183}
   - component: {fileID: 931845182}
   - component: {fileID: 931845181}
-  - component: {fileID: 931845179}
   m_Layer: 0
   m_Name: 'Write Local Save Data: Button'
   m_TagString: Untagged
@@ -618,19 +622,6 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &931845179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931845177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ca61f3423e35b47ad5956b4215a6c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SaveFileObject: {fileID: 0}
 --- !u!114 &931845181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,7 +665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 931845179}
+      - m_Target: {fileID: 673543023}
         m_MethodName: SetSaveObject_PlayerName
         m_Mode: 5
         m_Arguments:
@@ -685,29 +676,29 @@ MonoBehaviour:
           m_StringArgument: Richard Pagnozzi
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 931845179}
-        m_MethodName: SetSaveObject_PlayTime
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 4.2
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 931845179}
+      - m_Target: {fileID: 673543023}
         m_MethodName: SetSaveObject_PlayerLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 19
-          m_FloatArgument: 0
+          m_IntArgument: 420
+          m_FloatArgument: 4.2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 931845179}
+      - m_Target: {fileID: 673543023}
+        m_MethodName: SetSaveObject_PlayTime
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 19
+          m_FloatArgument: 1.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 673543023}
         m_MethodName: SetSaveObject_GodMode
         m_Mode: 6
         m_Arguments:

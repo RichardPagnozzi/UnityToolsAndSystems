@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 /// <summary>
 /// This class should be used in 2 ways: 
@@ -11,69 +12,60 @@ public class saveFileWriter : MonoBehaviour
 {
     #region Variables
     [SerializeField]
-    private saveFileObject m_SaveFileObject;
+    private  saveFileObject m_SaveFileObject;
+    private string m_path;
     #endregion
-
 
     #region Factory Methods
     private void Awake()
     {
-        Set_SaveFileObjectInstance();
-    }
-
-    private void Set_SaveFileObjectInstance()
-    {
-        if (GameObject.FindGameObjectWithTag("SaveFileObject") != null)
-        {
-            m_SaveFileObject = GameObject.FindGameObjectWithTag("SaveFileObject").GetComponent<saveFileObject>();
-        }
-        else
-        {
-            GameObject obj = new GameObject("SaveFileObject");
-            obj.AddComponent<saveFileObject>();
-            obj.gameObject.tag = "SaveFileObject";
-            obj.gameObject.transform.SetParent(null);
-            m_SaveFileObject = obj.GetComponent<saveFileObject>();
-        }
+        m_SaveFileObject = GameObject.FindGameObjectWithTag("SaveFileObject").GetComponent<saveFileObject>();
+        m_path = Application.persistentDataPath + "/UTS_SaveFileFolder/UTS_SaveFile.json";
     }
     #endregion
 
     #region Local Save Variables Methods
-    public void SetSaveObject_PlayerLevel(int level)
+    public  void SetSaveObject_PlayerLevel(int level)     // Save Int
     {
         m_SaveFileObject.SetLocalSave_PlayerLevel(level);
     }
 
-    public void SetSaveObject_PlayTime(float time)
+    public  void SetSaveObject_PlayTime(float time)    // Save Float
     {
         m_SaveFileObject.SetLocalSave_PlayTime(time);
     }
 
-    public void SetSaveObject_GodMode(bool toggle)
+    public  void SetSaveObject_GodMode(bool toggle)    // Save Boolean
     {
         m_SaveFileObject.SetLocalSave_GodMode(toggle);
     }
 
-    public void SetSaveObject_PlayerName(string name)
+    public  void SetSaveObject_PlayerName(string name)    // Save String
     {
         m_SaveFileObject.SetLocalSave_PlayerName(name);
     }
-
-    public void ClearSaveObjectVariables()
+ 
+    public  void ClearSaveObjectVariables()    // Clear Save
     {
-        m_SaveFileObject.ClearSaveVariables();
+        m_SaveFileObject.ClearLocalSaveVariables();
     }
     #endregion
 
-    #region Global Save Variables Methods
-    public void SaveLocal_ToGlobal()
+    #region Write To JSON Method
+    public void WriteToJSON()     // Save/Write jSon Utility File to jSon
     {
-        m_SaveFileObject.SaveLocal_ToGlobal();
-    }
+        string data = JsonUtility.ToJson(m_SaveFileObject.GetSaveFile());
 
-    public void SaveGlobal_toJSON()
-    {
-        m_SaveFileObject.SaveJSON();
+#if UNITY_ANDROID
+        File.WriteAllText(m_path, data);                
+#else
+        using (TextWriter writer = File.CreateText(m_path))
+        {
+            writer.Write(data);
+        }
+#endif      
     }
     #endregion 
+
+
 }
