@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class ObjectFloat : MonoBehaviour
 {
-    public float degreesPerSecond = 15.0f;
-    public float amplitude = 0.5f;
-    public float frequency = 1f;
-
+    [SerializeField]
+    private float degreesPerSecond = 15.0f;
+   
+    [SerializeField]
+    private float amplitude = 0.5f;
+   
+    [SerializeField]
+    private float frequency = 1f;
+     
     // Position Storage Variables
-    Vector3 posOffset = new Vector3();
-    Vector3 tempPos = new Vector3();
+    private Vector3 posOffset = new Vector3();
+    private Vector3 tempPos = new Vector3();
 
     // Use this for initialization
     void Start()

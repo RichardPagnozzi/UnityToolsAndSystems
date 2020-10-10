@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Spin : MonoBehaviour
 {
-    public float speed = 10f;
-    public bool SpinRight = true;
+    [SerializeField]
+    private float speed = 10f;
+    [SerializeField]
+    private bool SpinRight = true;
 
     void Update()
     {
@@ -13,6 +15,5 @@ public class Spin : MonoBehaviour
         transform.Rotate(new Vector3(0,0,1), speed * Time.deltaTime);
         else
             transform.Rotate(new Vector3(0, 0, -1), speed * Time.deltaTime);
-
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SelfDestruct : MonoBehaviour
 {
-    public float LifeTime = 1.5f;
+    [SerializeField]
+    private float LifeTime = 1.5f;
     private float timer;
 
 
