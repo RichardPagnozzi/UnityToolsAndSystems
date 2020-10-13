@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WorldBuilder_GUI
+namespace UTS
 {
     public class Navigator : MonoBehaviour
     {

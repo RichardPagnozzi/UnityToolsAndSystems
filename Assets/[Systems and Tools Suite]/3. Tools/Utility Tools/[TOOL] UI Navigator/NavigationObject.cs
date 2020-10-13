@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace WorldBuilder_GUI
+namespace UTS
 {
     public class NavigationObject : MonoBehaviour
     {

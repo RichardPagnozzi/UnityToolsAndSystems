@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spin : MonoBehaviour
+namespace UTS
 {
-    [SerializeField]
-    private float speed = 10f;
-    [SerializeField]
-    private bool SpinRight = true;
-
-    void Update()
+    public class Spin : MonoBehaviour
     {
-        if(SpinRight)
-        transform.Rotate(new Vector3(0,0,1), speed * Time.deltaTime);
-        else
-            transform.Rotate(new Vector3(0, 0, -1), speed * Time.deltaTime);
+        [SerializeField]
+        private float speed = 10f;
+        [SerializeField]
+        private bool SpinRight = true;
+
+        void Update()
+        {
+            if (SpinRight)
+                transform.Rotate(new Vector3(0, 0, 1), speed * Time.deltaTime);
+            else
+                transform.Rotate(new Vector3(0, 0, -1), speed * Time.deltaTime);
+        }
     }
 }

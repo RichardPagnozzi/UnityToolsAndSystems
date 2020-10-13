@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Compass : MonoBehaviour
+namespace UTS
 {
-    [SerializeField]
-    private GameObject trackedObject;
-    [SerializeField]
-    private Vector3 rotation;
-
-
-
-    void Update()
+    public class Compass : MonoBehaviour
     {
-        rotation = new Vector3(0, 0, trackedObject.transform.eulerAngles.y);
-        transform.rotation = Quaternion.Euler(rotation);
+        [SerializeField]
+        private GameObject trackedObject;
+        [SerializeField]
+        private Vector3 rotation;
 
+
+
+        void Update()
+        {
+            rotation = new Vector3(0, 0, trackedObject.transform.eulerAngles.y);
+            transform.rotation = Quaternion.Euler(rotation);
+
+        }
     }
 }

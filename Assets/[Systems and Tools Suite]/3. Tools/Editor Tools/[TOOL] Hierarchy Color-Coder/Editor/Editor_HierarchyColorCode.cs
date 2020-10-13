@@ -3,134 +3,136 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Editor_HierarchyColorCode : MonoBehaviour
+namespace UTS
 {
-
-    /// <summary>
-    /// The Logic that drives the color coding
-    /// Depending on the lisence, the colors will change
-    /// </summary>
-#if UNITY_PRO_LICENSE
-    #region Hierarchy Logic Class
-#if UNITY_EDITOR
-    [InitializeOnLoad]
-    public class CustomHierarchyWindow : MonoBehaviour
+    public class Editor_HierarchyColorCode : MonoBehaviour
     {
-        private static Vector2 offset = new Vector2(0, 0);
-        public static Color inActiveColor = new Color(0.3113208f, 0.02790138f, 0.08047181f);
-        public static Color gameObjectFontColor = Color.gray;
-        public static Color gameObjectBackgroundColor = new Color(0.2196079f, 0.2196079f, 0.2196079f);
-        public static Color prefabColor = Color.white;
-        public static Color Asterix = Color.green;
-        public static Color Exclamation = Color.yellow;
-        public static Color Tilde = Color.red;
-        public static bool isActive = false;
+
+        /// <summary>
+        /// The Logic that drives the color coding
+        /// Depending on the lisence, the colors will change
+        /// </summary>
+#if UNITY_PRO_LICENSE
+        #region Hierarchy Logic Class
+#if UNITY_EDITOR
+        [InitializeOnLoad]
+        public class CustomHierarchyWindow : MonoBehaviour
+        {
+            private static Vector2 offset = new Vector2(0, 0);
+            public static Color inActiveColor = new Color(0.3113208f, 0.02790138f, 0.08047181f);
+            public static Color gameObjectFontColor = Color.gray;
+            public static Color gameObjectBackgroundColor = new Color(0.2196079f, 0.2196079f, 0.2196079f);
+            public static Color prefabColor = Color.white;
+            public static Color Asterix = Color.green;
+            public static Color Exclamation = Color.yellow;
+            public static Color Tilde = Color.red;
+            public static bool isActive = false;
 
 
-        static CustomHierarchyWindow()
-        {
-            EditorApplication.hierarchyWindowItemOnGUI += HandleHierarchyWindowItemOnGUI;
-        }
-        private static void HandleHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
-        {
-            if (isActive)
+            static CustomHierarchyWindow()
             {
-                Color fontColor = gameObjectFontColor;
-                Color backgroundColor = gameObjectBackgroundColor;
-                FontStyle styleFont = FontStyle.Normal;
-                var obj = EditorUtility.InstanceIDToObject(instanceID);
-                GameObject gameObj = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
-
-                if (obj != null)
+                EditorApplication.hierarchyWindowItemOnGUI += HandleHierarchyWindowItemOnGUI;
+            }
+            private static void HandleHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
+            {
+                if (isActive)
                 {
-                    PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(obj);
+                    Color fontColor = gameObjectFontColor;
+                    Color backgroundColor = gameObjectBackgroundColor;
+                    FontStyle styleFont = FontStyle.Normal;
+                    var obj = EditorUtility.InstanceIDToObject(instanceID);
+                    GameObject gameObj = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
 
-                    if (gameObj.activeInHierarchy == false)
+                    if (obj != null)
                     {
-                        backgroundColor = inActiveColor;
-                    }
+                        PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(obj);
 
-                    Rect offsetRect = new Rect(selectionRect.position + offset, selectionRect.size);
-                    EditorGUI.DrawRect(selectionRect, backgroundColor);
-
-                    #region Prefix Color Logic
-                    if (obj.name[0] == '*')
-                    {
-                        string name = obj.name.Remove(0, 1);
-                        if (prefabType == PrefabAssetType.Regular)
+                        if (gameObj.activeInHierarchy == false)
                         {
-                            styleFont = FontStyle.Bold;
-                            fontColor = prefabColor;
+                            backgroundColor = inActiveColor;
                         }
-                        else
-                            styleFont = FontStyle.Normal;
-                        EditorGUI.LabelField(offsetRect, name, new GUIStyle()
+
+                        Rect offsetRect = new Rect(selectionRect.position + offset, selectionRect.size);
+                        EditorGUI.DrawRect(selectionRect, backgroundColor);
+
+                        #region Prefix Color Logic
+                        if (obj.name[0] == '*')
                         {
-                            normal = new GUIStyleState() { textColor = Asterix },
-                            fontStyle = styleFont
-                        });
-                    }
-                    else if (obj.name[0] == '!')
-                    {
-                        string name = obj.name.Remove(0, 1);
-                        if (prefabType == PrefabAssetType.Regular)
-                        {
-                            styleFont = FontStyle.Bold;
-                            fontColor = prefabColor;
+                            string name = obj.name.Remove(0, 1);
+                            if (prefabType == PrefabAssetType.Regular)
+                            {
+                                styleFont = FontStyle.Bold;
+                                fontColor = prefabColor;
+                            }
+                            else
+                                styleFont = FontStyle.Normal;
+                            EditorGUI.LabelField(offsetRect, name, new GUIStyle()
+                            {
+                                normal = new GUIStyleState() { textColor = Asterix },
+                                fontStyle = styleFont
+                            });
                         }
-                        else
-                            styleFont = FontStyle.Normal;
-                        EditorGUI.LabelField(offsetRect, name, new GUIStyle()
+                        else if (obj.name[0] == '!')
                         {
-                            normal = new GUIStyleState() { textColor = Exclamation },
-                            fontStyle = styleFont
-                        });
-                    }
-                    else if (obj.name[0] == '~')
-                    {
-                        string name = obj.name.Remove(0, 1);
-
-                        if (prefabType == PrefabAssetType.Regular)
-                        {
-                            styleFont = FontStyle.Bold;
-                            fontColor = prefabColor;
+                            string name = obj.name.Remove(0, 1);
+                            if (prefabType == PrefabAssetType.Regular)
+                            {
+                                styleFont = FontStyle.Bold;
+                                fontColor = prefabColor;
+                            }
+                            else
+                                styleFont = FontStyle.Normal;
+                            EditorGUI.LabelField(offsetRect, name, new GUIStyle()
+                            {
+                                normal = new GUIStyleState() { textColor = Exclamation },
+                                fontStyle = styleFont
+                            });
                         }
-                        else
-                            styleFont = FontStyle.Normal;
-                        EditorGUI.LabelField(offsetRect, name, new GUIStyle()
+                        else if (obj.name[0] == '~')
                         {
+                            string name = obj.name.Remove(0, 1);
 
-                            normal = new GUIStyleState() { textColor = Tilde },
-                            fontStyle = FontStyle.Normal
-                        });
-                    }
-                    #endregion Prefix Color Logic
+                            if (prefabType == PrefabAssetType.Regular)
+                            {
+                                styleFont = FontStyle.Bold;
+                                fontColor = prefabColor;
+                            }
+                            else
+                                styleFont = FontStyle.Normal;
+                            EditorGUI.LabelField(offsetRect, name, new GUIStyle()
+                            {
 
-
-                    if (obj.name[0] != '!' && obj.name[0] != '~' && obj.name[0] != '*')
-                    {
-                        if (prefabType == PrefabAssetType.Regular)
-                        {
-                            styleFont = FontStyle.Bold;
-                            fontColor = prefabColor;
+                                normal = new GUIStyleState() { textColor = Tilde },
+                                fontStyle = FontStyle.Normal
+                            });
                         }
-                        else
-                            styleFont = FontStyle.Normal;
+                        #endregion Prefix Color Logic
 
-                        EditorGUI.LabelField(offsetRect, obj.name, new GUIStyle()
+
+                        if (obj.name[0] != '!' && obj.name[0] != '~' && obj.name[0] != '*')
                         {
-                            normal = new GUIStyleState() { textColor = fontColor },
-                            fontStyle = styleFont
-                        });
+                            if (prefabType == PrefabAssetType.Regular)
+                            {
+                                styleFont = FontStyle.Bold;
+                                fontColor = prefabColor;
+                            }
+                            else
+                                styleFont = FontStyle.Normal;
+
+                            EditorGUI.LabelField(offsetRect, obj.name, new GUIStyle()
+                            {
+                                normal = new GUIStyleState() { textColor = fontColor },
+                                fontStyle = styleFont
+                            });
+                        }
                     }
                 }
             }
         }
-    }
 #endif
-    #endregion
+        #endregion
 #else
-    #region Hierarchy Logic Class
+        #region Hierarchy Logic Class
 #if UNITY_EDITOR
     [InitializeOnLoad]
     public class CustomHierarchyWindow : MonoBehaviour
@@ -169,7 +171,7 @@ public class Editor_HierarchyColorCode : MonoBehaviour
                 Rect offsetRect = new Rect(selectionRect.position + offset, selectionRect.size);
                 EditorGUI.DrawRect(selectionRect, backgroundColor);
 
-                #region Prefix Color Logic
+        #region Prefix Color Logic
                 if (obj.name[0] == '*')
                 {
                     string name = obj.name.Remove(0, 1);
@@ -220,7 +222,7 @@ public class Editor_HierarchyColorCode : MonoBehaviour
                         fontStyle = FontStyle.Normal
                     });
                 }
-                #endregion Prefix Color Logic
+        #endregion Prefix Color Logic
 
 
                 if (obj.name[0] != '!' && obj.name[0] != '~' && obj.name[0] != '*')
@@ -243,33 +245,34 @@ public class Editor_HierarchyColorCode : MonoBehaviour
         }
     }
 #endif
-    #endregion
+        #endregion
 #endif
 
-    /// <summary>
-    /// Editor Class that handles the actual Editor Window UI
-    /// </summary>
-    #region Hierarchy Editor Class
+        /// <summary>
+        /// Editor Class that handles the actual Editor Window UI
+        /// </summary>
+        #region Hierarchy Editor Class
 #if UNITY_EDITOR
-    public class HierarchyEditorWindow : EditorWindow
-    {
-        [MenuItem("UTS/Utility/Hierarchy Color Coder")]
-        public static void ShowWindow()
+        public class HierarchyEditorWindow : EditorWindow
         {
-            GetWindow<HierarchyEditorWindow>("HierarchyEditor");
+            [MenuItem("UTS/Utility/Hierarchy Color Coder")]
+            public static void ShowWindow()
+            {
+                GetWindow<HierarchyEditorWindow>("HierarchyEditor");
+            }
+            private void OnGUI()
+            {
+                CustomHierarchyWindow.gameObjectFontColor = EditorGUILayout.ColorField("Original Font Color", CustomHierarchyWindow.gameObjectFontColor);
+                CustomHierarchyWindow.gameObjectBackgroundColor = EditorGUILayout.ColorField("Background Color", CustomHierarchyWindow.gameObjectBackgroundColor);
+                CustomHierarchyWindow.inActiveColor = EditorGUILayout.ColorField("Inactive Color", CustomHierarchyWindow.inActiveColor);
+                CustomHierarchyWindow.Asterix = EditorGUILayout.ColorField(" * Color", CustomHierarchyWindow.Asterix);
+                CustomHierarchyWindow.Exclamation = EditorGUILayout.ColorField(" ! Color", CustomHierarchyWindow.Exclamation);
+                CustomHierarchyWindow.Tilde = EditorGUILayout.ColorField(" ~ Color", CustomHierarchyWindow.Tilde);
+                CustomHierarchyWindow.isActive = EditorGUILayout.Toggle("Is Active?", CustomHierarchyWindow.isActive);
+            }
         }
-        private void OnGUI()
-        {
-            CustomHierarchyWindow.gameObjectFontColor = EditorGUILayout.ColorField("Original Font Color", CustomHierarchyWindow.gameObjectFontColor);
-            CustomHierarchyWindow.gameObjectBackgroundColor = EditorGUILayout.ColorField("Background Color", CustomHierarchyWindow.gameObjectBackgroundColor);
-            CustomHierarchyWindow.inActiveColor = EditorGUILayout.ColorField("Inactive Color", CustomHierarchyWindow.inActiveColor);
-            CustomHierarchyWindow.Asterix = EditorGUILayout.ColorField(" * Color", CustomHierarchyWindow.Asterix);
-            CustomHierarchyWindow.Exclamation = EditorGUILayout.ColorField(" ! Color", CustomHierarchyWindow.Exclamation);
-            CustomHierarchyWindow.Tilde = EditorGUILayout.ColorField(" ~ Color", CustomHierarchyWindow.Tilde);
-            CustomHierarchyWindow.isActive = EditorGUILayout.Toggle("Is Active?", CustomHierarchyWindow.isActive);          
-        }
-    }
 #endif
-    #endregion
+        #endregion
 
+    }
 }
