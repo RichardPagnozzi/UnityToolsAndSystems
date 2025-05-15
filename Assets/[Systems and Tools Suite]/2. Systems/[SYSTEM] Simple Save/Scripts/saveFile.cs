@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// 
 /// This class is a template of what the jSon will be printing.
 /// You can modify the variables to save different chunks of data. 

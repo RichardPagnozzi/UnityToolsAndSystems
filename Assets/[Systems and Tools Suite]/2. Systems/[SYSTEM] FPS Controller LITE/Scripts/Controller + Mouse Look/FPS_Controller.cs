@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 
 [AddComponentMenu("Richs FPS Scripts/Controller")]
 [RequireComponent(typeof(CharacterController))]
 public class FPS_Controller : MonoBehaviour
 {
-    #region Variables
+    #region Members
     
     #region Scriptable Object Settings
     [SerializeField]
@@ -85,12 +82,11 @@ public class FPS_Controller : MonoBehaviour
         else
             isMoving = false;
     }
-    //
+
     #endregion Start + Update 
 
 
     #region Movement Mechanic Methods
-    //
     void JumpHandler()
     {
         if ((Input.GetButtonDown("Jump")) && !isCrouching & controller.isGrounded)
@@ -184,10 +180,9 @@ public class FPS_Controller : MonoBehaviour
             PlayFoostep = false;
         }
     }
-    //
     #endregion Movement Mechanic Methods
 
-      
+    
     private void JumpPadHandler()
     {
         if (hitJumpPad)
