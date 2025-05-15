@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyExample : EnemyBase
@@ -87,10 +85,10 @@ public class EnemyExample : EnemyBase
             Player = GameObject.FindGameObjectWithTag("Player");
 
             EnemyTargeting.m_attackRange = 2.6f;
-            EnemyTargeting.m_pursuitRange = 15;
+            EnemyTargeting.m_pursuitRange = 30;
             EnemyTargeting.m_chaseRange = 30f;
             EnemyTargeting.m_chaseSpeed = Random.Range(6, 8);
-            EnemyTargeting.m_wanderRadius = 3.5f;
+            EnemyTargeting.m_wanderRadius = 4f;
             EnemyTargeting.m_wanderInterval = Random.Range(2f, 4f);
             EnemyTargeting.Player = Player;
 
